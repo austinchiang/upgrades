@@ -38,7 +38,7 @@ baseDir=$(PWD)
 
 	echo
 	echo
-	echo "Specify app server (tomcat, jboss):"
+	echo "Specify app server (tomcat, jboss, wildfly):"
 	echo
 	echo
 
@@ -226,6 +226,8 @@ baseDir=$(PWD)
 		libExt=${liferayHome}/tomcat-8.0.32/lib/ext
 	elif [[ ${appServer} == jboss ]]; then
 		libExt=${liferayHome}/jboss-eap-6.4.0/modules/com/liferay/portal/main
+	elif [[ ${appServer} == wildfly ]]; then
+		libExt=${liferayHome}/wildfly-10.0.0/modules/com/liferay/portal/main
 	fi
 
 	if [[ ${database} == mysql ]]; then
@@ -249,9 +251,9 @@ baseDir=$(PWD)
 		jarFile=mariadb.jar
 	fi
 
-# Extra setup for JBoss
+# Extra setup for JBoss and Wildfly
 
-	if [[ ${appServer} == jboss ]]; then	
+	if [[ ${appServer} == jboss || ${appServer} == wildfly ]]; then	
 		if [[ ${database} == db2 ]]; then
 			sed -i '/<resources>*/ a\
 		<resource-root path="db2jcc.jar" /> \
