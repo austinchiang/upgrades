@@ -162,47 +162,46 @@ baseDir=$(PWD)
 
 	echo -e "liferay.home=${_liferayHome}\njdbc.default.driverClassName=${jdbcDefaultDriver}\njdbc.default.url=${jdbcDefaultUrl}\njdbc.default.username=${jdbcDefaultUsername}\njdbc.default.password=${jdbcDefaultPassword}" > ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 
-
 	legacy61="hibernate.cache.use_query_cache=true
-			hibernate.cache.use_second_level_cache=true
-			locale.prepend.friendly.url.style=1
-			passwords.encryption.algorithm.legacy=SHA
-			layout.set.prototype.propagate.logo=true
-			mobile.device.styling.wap.enabled=true
-			dl.char.blacklist=\\\\,//,:,*,?,\",<,>,|,[,],../,/..
-			dl.char.last.blacklist=
-			dl.name.blacklist=
-			journal.articles.search.with.index=false"
+		hibernate.cache.use_second_level_cache=true
+		locale.prepend.friendly.url.style=1
+		passwords.encryption.algorithm.legacy=SHA
+		layout.set.prototype.propagate.logo=true
+		mobile.device.styling.wap.enabled=true
+		dl.char.blacklist=\\\\,//,:,*,?,\",<,>,|,[,],../,/..
+		dl.char.last.blacklist=
+		dl.name.blacklist=
+		journal.articles.search.with.index=false"
 
 	legacy62="users.image.check.token=false
-			layout.set.prototype.propagate.logo=true
-			editor.wysiwyg.portal-web.docroot.html.taglib.ui.discussion.jsp=simple
-			web.server.servlet.check.image.gallery=true
-			blogs.trackback.enabled=true
-			discussion.comments.format=bbcode
-			discussion.max.comments=0
-			dl.file.entry.thumbnail.max.height=128
-			dl.file.entry.thumbnail.max.width=128"
+		layout.set.prototype.propagate.logo=true
+		editor.wysiwyg.portal-web.docroot.html.taglib.ui.discussion.jsp=simple
+		web.server.servlet.check.image.gallery=true
+		blogs.trackback.enabled=true
+		discussion.comments.format=bbcode
+		discussion.max.comments=0
+		dl.file.entry.thumbnail.max.height=128
+		dl.file.entry.thumbnail.max.width=128"
 
 	if [[ ${upgradeVersion} == 6.0 ]]; then
 		echo -e "users.last.name.required=true
-				portal.security.manager.strategy=liferay
-				layout.types=portlet,panel,embedded,article,url,link_to_layout
-				setup.wizard.enabled=false
-				discussion.subscribe.by.default=false
-				dl.store.cmis.credentials.username=\${dl.hook.cmis.credentials.username}
-				dl.store.cmis.credentials.password=\${dl.hook.cmis.credentials.password}
-				dl.store.cmis.repository.url=\${dl.hook.cmis.repository.url}
-				dl.store.cmis.system.root.dir=\${dl.hook.cmis.system.root.dir}
-				dl.store.file.system.root.dir=\${dl.hook.file.system.root.dir}
-				dl.store.jcr.fetch.delay=\${dl.hook.jcr.fetch.delay}
-				dl.store.jcr.fetch.max.failures=\${dl.hook.jcr.fetch.max.failures}
-				dl.store.jcr.move.version.labels=\${dl.hook.jcr.move.version.labels}
-				dl.store.s3.access.key=\${dl.hook.s3.access.key}
-				dl.store.s3.secret.key=\${dl.hook.s3.secret.key}
-				dl.store.s3.bucket.name=\${dl.hook.s3.bucket.name}
-				message.boards.subscribe.by.default=false
-				${legacy61}\n${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
+		portal.security.manager.strategy=liferay
+		layout.types=portlet,panel,embedded,article,url,link_to_layout
+		setup.wizard.enabled=false
+		discussion.subscribe.by.default=false
+		dl.store.cmis.credentials.username=\${dl.hook.cmis.credentials.username}
+		dl.store.cmis.credentials.password=\${dl.hook.cmis.credentials.password}
+		dl.store.cmis.repository.url=\${dl.hook.cmis.repository.url}
+		dl.store.cmis.system.root.dir=\${dl.hook.cmis.system.root.dir}
+		dl.store.file.system.root.dir=\${dl.hook.file.system.root.dir}
+		dl.store.jcr.fetch.delay=\${dl.hook.jcr.fetch.delay}
+		dl.store.jcr.fetch.max.failures=\${dl.hook.jcr.fetch.max.failures}
+		dl.store.jcr.move.version.labels=\${dl.hook.jcr.move.version.labels}
+		dl.store.s3.access.key=\${dl.hook.s3.access.key}
+		dl.store.s3.secret.key=\${dl.hook.s3.secret.key}
+		dl.store.s3.bucket.name=\${dl.hook.s3.bucket.name}
+		message.boards.subscribe.by.default=false
+		${legacy61}\n${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 	elif [[ ${upgradeVersion} == 6.1 ]]; then
 		echo -e "${legacy61}\n${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 	elif [[ ${upgradeVersion} == 6.2 ]]; then
