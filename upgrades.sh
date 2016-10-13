@@ -112,7 +112,7 @@ fi
 
 # Sets bundle directory and unzips bundle
 
-if [[ ${portalVersion} == dxp ]]; then	
+if [[ ${portalVersion} == dxp ]]; then
 	liferayHome=${baseDir}/liferay-dxp-digital-enterprise-7.0-${minorVersion}
 	zipFile=liferay-dxp-digital-enterprise-${appServer}-7.0-${minorVersion}*.zip
 elif [[ ${portalVersion} == ce ]]; then
@@ -237,7 +237,7 @@ if [[ ${upgradeVersion} == 6.0 ]]; then
 elif [[ ${upgradeVersion} == 6.1 ]]; then
 	echo -e "${legacy61}\n${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 elif [[ ${upgradeVersion} == 6.2 ]]; then
-	echo -e "${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties		
+	echo -e "${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 fi
 
 echo
@@ -285,7 +285,7 @@ fi
 
 # Extra setup for JBoss and Wildfly
 
-if [[ ${appServer} == jboss || ${appServer} == wildfly ]]; then	
+if [[ ${appServer} == jboss || ${appServer} == wildfly ]]; then
 	if [[ ${database} == db2 ]]; then
 		sed -i '/<resources>*/ a\
 	<resource-root path="db2jcc.jar" /> \
@@ -308,7 +308,7 @@ if [[ ${database} == mysql ]]; then
 			mysql -u -p -e 'drop database lportal;'
 			echo "[STATUS] 'lportal' dropped."
 		fi
-		
+
 		echo "[STATUS] Creating database 'lportal'..."
 		mysql -u -p -e 'create database lportal character set utf8;'
 		echo "[STATUS] 'lportal' created."
