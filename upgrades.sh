@@ -146,6 +146,22 @@ baseDir=$(PWD)
 	echo
 	echo
 
+	# Unzip data folder and .sql file to bundle
+
+	echo
+	echo
+	echo "[STATUS] Unzipping the upgrades data folder to ${liferayHome}"
+	echo
+	echo
+
+	unzip data.zip -d ${liferayHome}
+
+	echo
+	echo
+	echo "[STATUS] Unzipped data folder."
+	echo
+	echo
+
 	# Writes portal-ext to bundle home
 
 	echo
