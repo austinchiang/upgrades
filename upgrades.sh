@@ -2,73 +2,28 @@ baseDir=$(PWD)
 
 # Input stuff
 
-echo
-echo
-echo "Please select which Liferay Portal to run:"
-echo "	 dxp"
-echo "	 ce "
-echo
-echo
-
+echo -e "\n\nPlease select which Liferay Portal to run:\n\n"
 read portalVersion
 
-echo
-echo
-echo "Select database: mysql, oracle, postgresql, sqlserver, db2, mariadb, sybase"
-echo
-echo
-
+echo -e "\n\nSelect database: mysql, oracle, postgresql, sqlserver, db2, mariadb, sybase\n\n"
 read database
 
-echo
-echo
-echo "Specify database username:"
-echo
-echo
-
+echo -e "\n\nSpecify database username:\n\n"
 read dbUsername
 
-echo
-echo
-echo "Specify database password:"
-echo
-echo
-
+echo -e "\n\nSpecify database password:\n\n"
 read dbPassword
 
-echo
-echo
-echo "Specify vm ip (or use localhost):"
-echo
-echo
-
+echo "\n\nSpecify vm ip (or use localhost):\n\n"
 read vmIP
 
-echo
-echo
-echo "Specify minor version (ga1, ga2, etc.):"
-echo
-echo
-
+echo -e "\n\nSpecify minor version (ga1, ga2, etc.):\n\n"
 read minorVersion
 
-echo
-echo
-echo "Specify app server (tomcat, jboss, wildfly):"
-echo
-echo
-
+echo -e "\n\nSpecify app server (tomcat, jboss, wildfly):\n\n"
 read appServer
 
-echo
-echo
-echo "Please what version of Liferay Portal you are upgrading from:"
-echo "  6.0"
-echo "  6.1"
-echo "  6.2"
-echo
-echo
-
+echo -e "\n\nPlease what version of Liferay Portal you are upgrading from:\n\t6.0\n\t6.1\n\t6.2\n\n"
 read upgradeVersion
 
 # Set portal-upgrade-ext properties
@@ -129,46 +84,27 @@ if [[ -e ${liferayHome} ]]; then
 	echo "[STATUS] Done."
 fi
 
-echo
-echo
-echo "[STATUS] Unzipping a new bundle for Liferay Portal ${releaseVersion}..."
-echo
-echo
+
+echo -e "\n\n[STATUS] Unzipping a new bundle for Liferay Portal ${releaseVersion}...\n\n"
 
 for file in *.zip
 do
 	unzip -q ${zipFile}
 done
 
-echo
-echo
-echo "[STATUS] Done."
-echo
-echo
+echo -e "\n\n[STATUS] Done.\n\n"
 
 # Unzip data folder and .sql file to bundle
 
-echo
-echo
-echo "[STATUS] Unzipping the upgrades data folder to ${liferayHome}"
-echo
-echo
+echo -e "\n\n[STATUS] Unzipping the upgrades data folder to ${liferayHome}\n\n"
 
 unzip data.zip -d ${liferayHome}
 
-echo
-echo
-echo "[STATUS] Unzipped data folder."
-echo
-echo
+echo -e "\n\n[STATUS] Unzipped data folder.\n\n"
 
 # Writes portal-ext to bundle home
 
-echo
-echo
-echo "[STATUS] Writing portal-ext.properties..."
-echo
-echo
+echo -e "\n\n[STATUS] Writing portal-ext.properties...\n\n"
 
 extFile=$baseDir/portal-ext.properties
 cp $extFile $liferayHome/
@@ -178,19 +114,11 @@ _liferayHome=${temp:0:1}":"${temp:1:${#temp}}
 
 echo -e "liferay.home=${_liferayHome}\njdbc.default.driverClassName=${jdbcDefaultDriver}\njdbc.default.url=${jdbcDefaultUrl}\njdbc.default.username=${jdbcDefaultUsername}\njdbc.default.password=${jdbcDefaultPassword}" > ${liferayHome}/portal-ext.properties
 
-echo
-echo
-echo "[STATUS] Done."
-echo
-echo
+echo -e "\n\n[STATUS] Done.\n\n"
 
 # Writes portal-upgrade-ext + legacy properties to upgrades folder
 
-echo
-echo
-echo "[STATUS] Writing portal-upgrade-ext properties..."
-echo
-echo
+echo -e "\n\n[STATUS] Writing portal-upgrade-ext properties...\n\n"
 
 echo -e "liferay.home=${_liferayHome}\njdbc.default.driverClassName=${jdbcDefaultDriver}\njdbc.default.url=${jdbcDefaultUrl}\njdbc.default.username=${jdbcDefaultUsername}\njdbc.default.password=${jdbcDefaultPassword}" > ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 
@@ -240,19 +168,11 @@ elif [[ ${upgradeVersion} == 6.2 ]]; then
 	echo -e "${legacy62}" |sed 's/^[ \t]*//' >> ${liferayHome}/tools/portal-tools-db-upgrade-client/portal-upgrade-ext.properties
 fi
 
-echo
-echo
-echo "[STATUS] Done."
-echo
-echo
+echo -e "\n\n[STATUS] Done.\n\n"
 
 # Sets directory for dependencies based on app server (tomcat only for now)
 
-echo
-echo
-echo "[STATUS] Setting dependencies..."
-echo
-echo
+echo -e "\n\n[STATUS] Setting dependencies...\n\n"
 
 if [[ ${appServer} == tomcat ]]; then
 	libExt=${liferayHome}/tomcat-8.0.32/lib/ext
