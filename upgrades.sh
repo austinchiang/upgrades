@@ -25,8 +25,11 @@ baseDir=$(PWD)
 	echo "Specify vm ip:"
 	echo
 	echo
+	echo "Specify vm ip (or use localhost):"
+	echo
+	echo
 
-	read vmip
+	read vmIP
 
 	echo
 	echo
@@ -59,37 +62,37 @@ baseDir=$(PWD)
 	
 	if [[ ${database} == mysql ]]; then
 		jdbcDefaultDriver=com.mysql.jdbc.Driver
-		jdbcDefaultUrl=jdbc:mysql://${vmip}/lportal?characterEncoding=UTF-8&dontTrackOpenResources=true&holdResultsOpenOverStatementClose=true&useFastDateParsing=false&useUnicode=true
+		jdbcDefaultUrl=jdbc:mysql://${vmIP}/lportal?characterEncoding=UTF-8&dontTrackOpenResources=true&holdResultsOpenOverStatementClose=true&useFastDateParsing=false&useUnicode=true
 		jdbcDefaultUsername=
 		jdbcDefaultPassword=
 	elif [[ ${database} == oracle ]]; then
 		jdbcDefaultDriver=oracle.jdbc.driver.OracleDriver
-		jdbcDefaultUrl=jdbc:oracle:thin:@${vmip}:1521:xe
+		jdbcDefaultUrl=jdbc:oracle:thin:@${vmIP}:1521:xe
 		jdbcDefaultUsername=lportal
 		jdbcDefaultPassword=lportal
 	elif [[ ${database} == postgresql ]]; then
 		jdbcDefaultDriver=org.postgresql.Driver
-		jdbcDefaultUrl=jdbc:postgresql://${vmip}:5432/lportal
+		jdbcDefaultUrl=jdbc:postgresql://${vmIP}:5432/lportal
 		jdbcDefaultUsername=sa
 		jdbcDefaultPassword=
 	elif [[ ${database} == sqlserver ]]; then
 		jdbcDefaultDriver=com.microsoft.sqlserver.jdbc.SQLServerDriver
-		jdbcDefaultUrl=jdbc:sqlserver://${vmip}/lportal
+		jdbcDefaultUrl=jdbc:sqlserver://${vmIP}/lportal
 		jdbcDefaultUsername=sa
 		jdbcDefaultPassword=
 	elif [[ ${database} == db2 ]]; then
 		jdbcDefaultDriver=com.ibm.db2.jcc.DB2Driver
-		jdbcDefaultUrl=jdbc:db2://${vmip}:50000/lportal:deferPrepares=false;fullyMaterializeInputStreams=true;fullyMaterializeLobData=true;progresssiveLocators=2;progressiveStreaming=2;
+		jdbcDefaultUrl=jdbc:db2://${vmIP}:50000/lportal:deferPrepares=false;fullyMaterializeInputStreams=true;fullyMaterializeLobData=true;progresssiveLocators=2;progressiveStreaming=2;
 		jdbcDefaultUsername=db2admin
 		jdbcDefaultPassword=lportal
 	elif [[ ${database} == mariadb ]]; then
 		jdbcDefaultDriver=org.mariadb.jdbc.Driver
-		jdbcDefaultUrl=jdbc:mariadb://${vmip}/lportal?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+		jdbcDefaultUrl=jdbc:mariadb://${vmIP}/lportal?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
 		jdbcDefaultUsername=
 		jdbcDefaultPassword=
 	elif [[ ${database} == sybase ]]; then
 		jdbcDefaultDriver=com.sybase.jdbc4.jdbc.SybDriver
-		jdbcDefaultUrl=jdbc:sybase:Tds:${vmip}:5000/lportal
+		jdbcDefaultUrl=jdbc:sybase:Tds:${vmIP}:5000/lportal
 		jdbcDefaultUsername=
 		jdbcDefaultPassword=
 	fi
