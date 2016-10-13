@@ -22,7 +22,20 @@ baseDir=$(PWD)
 
 	echo
 	echo
-	echo "Specify vm ip:"
+	echo "Specify database username:"
+	echo
+	echo
+
+	read dbUsername
+
+	echo
+	echo
+	echo "Specify database password:"
+	echo
+	echo
+
+	read dbPassword
+
 	echo
 	echo
 	echo "Specify vm ip (or use localhost):"
@@ -266,4 +279,26 @@ baseDir=$(PWD)
 		else
 		sed -i '/<resources>*/ a\
 		<resource-root path="'${jarFile}'" />' ${libExt}/module.xml
+	fi
+
+# Creates and imports MySQL database called lportal
+
+	if [[ ${database} == mysql ]]; then
+		if [[ ${vmIP} == localhost ]]; then
+			dbName=`mysql -u -p --skip-column-names -e "SHOW DATABASES LIKE 'lportal'"`
+
+			if [[ ${dbName} == "lportal" ]]; then
+				echo "[STATUS] Dropping 'lportal' because it exists..."
+				mysql -u -p -e 'drop database lportal;'
+				echo "[STATUS] 'lportal' dropped."
+			fi
+			
+			echo "[STATUS] Creating database 'lportal'..."
+			mysql -u -p -e 'create database lportal character set utf8;'
+			echo "[STATUS] 'lportal' created."
+
+			echo "[STATUS] Importing lportal.sql to 'lportal'..."
+			mysql --user=${dbUsername} --password=${dbPassword} lportal < ${liferayHome}/lportal.sql
+			echo "[STATUS] Import done."
+		fi
 	fi
