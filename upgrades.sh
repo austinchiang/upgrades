@@ -63,6 +63,9 @@ elif [[ ${database} == sybase ]]; then
 	jdbcDefaultUrl=jdbc:sybase:Tds:${vmIP}:5000/lportal
 	jdbcDefaultUsername=
 	jdbcDefaultPassword=
+else
+	echo "[ERROR] The database ${database} is not a valid database; please provide a valid database."
+	exit
 fi
 
 # Sets bundle directory and unzips bundle
