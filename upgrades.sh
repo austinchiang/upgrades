@@ -87,11 +87,9 @@ if [[ -e ${liferayHome} ]]; then
 	echo "[STATUS] Done."
 fi
 
-
 echo -e "\n\n[STATUS] Unzipping a new bundle for Liferay Portal ${releaseVersion}...\n\n"
 
-for file in *.zip
-do
+for file in *.zip; do
 	unzip -q ${zipFile}
 done
 
