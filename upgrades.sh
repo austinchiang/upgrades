@@ -90,9 +90,9 @@ elif [[ ${database} == postgresql ]]; then
 	jdbcDefaultPassword=
 elif [[ ${database} == sqlserver ]]; then
 	jdbcDefaultDriver=com.microsoft.sqlserver.jdbc.SQLServerDriver
-	jdbcDefaultUrl=jdbc:sqlserver://${vmIP}/lportal
+	jdbcDefaultUrl=jdbc:sqlserver://${vmIP}\;databaseName=lportal
 	jdbcDefaultUsername=sa
-	jdbcDefaultPassword=
+	jdbcDefaultPassword=password
 elif [[ ${database} == db2 ]]; then
 	jdbcDefaultDriver=com.ibm.db2.jcc.DB2Driver
 	jdbcDefaultUrl=jdbc:db2://${vmIP}:50000/lportal:deferPrepares=false;fullyMaterializeInputStreams=true;fullyMaterializeLobData=true;progresssiveLocators=2;progressiveStreaming=2;
@@ -293,7 +293,7 @@ if [[ ${appServer} == jboss || ${appServer} == wildfly ]]; then
 	<resource-root path="db2jcc4" />' ${libExt}/module.xml
 	fi
 	else
-	sed -i '/<resources>*/ a\
+		sed -i '/<resources>*/ a\
 	<resource-root path="'${jarFile}'" />' ${libExt}/module.xml
 fi
 
