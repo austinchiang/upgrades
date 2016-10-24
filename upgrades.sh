@@ -5,11 +5,20 @@ baseDir=$(PWD)
 echo -e "\n\nPlease select which Liferay Portal to run:\n\n"
 read portalVersion
 
-echo -e "\n\nSelect database: mysql, oracle, postgresql, sqlserver, db2, mariadb, sybase\n\n"
-read database
+while [[ ${portalVersion} != "dxp" && ${portalVersion} != "ce" ]]; do
+	read -p "Invalid input. Please select again (dxp, ce): `echo $'\n> '`" portalVersion
+	portalVersion=$(echo ${portalVersion} | tr '[A-Z]' '[a-z]')
+done
 
-echo -e "\n\nSpecify database username:\n\n"
-read dbUsername
+read -p "Please select a database (mysql, oracle, postgresql, sqlserver, db2, mariadb, sybase): `echo $'\n> '`" database
+
+while [[ ${database} != "mysql" && ${database} != "oracle" && ${database} != "postgresql" && ${database} != "sqlserver" && ${database} != "db2" && ${database} != "mariadb" && ${database} != "sybase" ]]; do
+	read -p "Invalid input. Please select again (mysql, oracle, postgresql, sqlserver, db2, mariadb, sybase): `echo $'\n> '`" database
+	database=$(echo ${database} | tr '[A-Z]' '[a-z]')
+done
+
+read -p "Specify database username: `echo $'\n> '`" dbUsername
+dbUsername=$(echo $dbUsername | tr '[A-Z]' '[a-z]')
 
 echo -e "\n\nSpecify database password:\n\n"
 read dbPassword
@@ -22,6 +31,11 @@ read minorVersion
 
 echo -e "\n\nSpecify app server (tomcat, jboss, wildfly):\n\n"
 read appServer
+
+while [[ ${appServer} != "tomcat" && ${appServer} != "jboss" && ${appServer} != "wildfly" ]]; do
+	read -p "Please select an app server (tomcat, jboss, wildfly): `echo $'\n> '`" appServer
+	appServer=$(echo ${appServer} | tr '[A-Z]' '[a-z]')
+done
 
 echo -e "\n\nPlease what version of Liferay Portal you are upgrading from:\n\t6.0\n\t6.1\n\t6.2\n\n"
 read upgradeVersion
