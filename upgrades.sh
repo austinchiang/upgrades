@@ -2,8 +2,7 @@ baseDir=$(PWD)
 
 # Input stuff
 
-echo -e "\n\nPlease select which Liferay Portal to run:\n\n"
-read portalVersion
+read -p "Please select which Liferay Portal to run (dxp, ce): `echo $'\n> '`" portalVersion
 
 while [[ ${portalVersion} != "dxp" && ${portalVersion} != "ce" ]]; do
 	read -p "Invalid input. Please select again (dxp, ce): `echo $'\n> '`" portalVersion
@@ -17,28 +16,26 @@ while [[ ${database} != "mysql" && ${database} != "oracle" && ${database} != "po
 	database=$(echo ${database} | tr '[A-Z]' '[a-z]')
 done
 
-read -p "Specify database username: `echo $'\n> '`" dbUsername
-dbUsername=$(echo $dbUsername | tr '[A-Z]' '[a-z]')
-
-echo -e "\n\nSpecify database password:\n\n"
-read dbPassword
-
-echo "\n\nSpecify vm ip (or use localhost):\n\n"
-read vmIP
-
-echo -e "\n\nSpecify minor version (ga1, ga2, etc.):\n\n"
-read minorVersion
-
-echo -e "\n\nSpecify app server (tomcat, jboss, wildfly):\n\n"
-read appServer
+read -p "Please select an app server (tomcat, jboss, wildfly): `echo $'\n> '`" appServer
 
 while [[ ${appServer} != "tomcat" && ${appServer} != "jboss" && ${appServer} != "wildfly" ]]; do
 	read -p "Please select an app server (tomcat, jboss, wildfly): `echo $'\n> '`" appServer
 	appServer=$(echo ${appServer} | tr '[A-Z]' '[a-z]')
 done
 
-echo -e "\n\nPlease what version of Liferay Portal you are upgrading from:\n\t6.0\n\t6.1\n\t6.2\n\n"
-read upgradeVersion
+read -p "Specify database username: `echo $'\n> '`" dbUsername
+dbUsername=$(echo $dbUsername | tr '[A-Z]' '[a-z]')
+
+read -p "Specify database password: `echo $'\n> '`" dbPassword
+dbPassword=$(echo $dbPassword | tr '[A-Z]' '[a-z]')
+
+read -p "Specify vm ip (or use localhost): `echo $'\n> '`" vmIP
+vmIP=$(echo $vmIP | tr '[A-Z]' '[a-z]')
+
+read -p "Specify minor version (ga1, ga2, etc.): `echo $'\n> '`" minorVersion
+minorVersion=$(echo $minorVersion | tr '[A-Z]' '[a-z]')
+
+read -p "Please what version of Liferay Portal you are upgrading from (6.0, 6.1, 6.2): `echo $'\n> '`" upgradeVersion
 
 # Set portal-upgrade-ext properties
 
