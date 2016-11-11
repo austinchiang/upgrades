@@ -255,4 +255,9 @@ if [[ ${database} == mysql ]]; then
 	fi
 fi
 
+# Delete extraneous files
+
+rm -rf data
+rm -f lportal.sql
+
 $SHELL
