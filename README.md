@@ -13,15 +13,15 @@ This script assumes:
   
 Running the script accomplishes the following:
   1. Unzips the bundle in the directory
-  2. Unzips upgrades data folder and lportal.sql into bundle home
+  2. Unzips upgrades document_library folder and lportal.sql into bundle home
   3. Writes portal-ext to bundle home
   4. Writes properties to portal-upgrade-ext in `tools/upgrade`
   5. Adds necessary dependencies to `lib/ext`
   6. Creates and imports database (currently, only importing lportal.sql into a local MySQL server is supported)
 
 More to come...
-- Error handling
 - More app server support
 - More db import support
 - Remote db import support
 - Modularity
+- Patching tool automation

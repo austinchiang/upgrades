@@ -186,7 +186,7 @@ fi
 
 echo -e "\n\n[STATUS] Done.\n\n"
 
-# Sets directory for dependencies based on app server (tomcat only for now)
+# Sets directory for dependencies based on app server
 
 echo -e "\n\n[STATUS] Setting dependencies...\n\n"
 
