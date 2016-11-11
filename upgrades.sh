@@ -254,3 +254,5 @@ if [[ ${database} == mysql ]]; then
 		echo "[STATUS] Import done."
 	fi
 fi
+
+$SHELL
