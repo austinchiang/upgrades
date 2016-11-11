@@ -128,7 +128,11 @@ _temp=${liferayHome/\//}
 temp=${_temp^}
 _liferayHome=${temp:0:1}":"${temp:1:${#temp}}
 
-echo -e "liferay.home=${_liferayHome}\njdbc.default.driverClassName=${jdbcDefaultDriver}\njdbc.default.url=${jdbcDefaultUrl}\njdbc.default.username=${jdbcDefaultUsername}\njdbc.default.password=${jdbcDefaultPassword}" > ${liferayHome}/portal-ext.properties
+if [[ ${upgradeVersion} == 6.0 || ${upgradeVersion} == 6.1 ]]; then
+	echo -e "liferay.home=${_liferayHome}\njdbc.default.driverClassName=${jdbcDefaultDriver}\njdbc.default.url=${jdbcDefaultUrl}\njdbc.default.username=${jdbcDefaultUsername}\njdbc.default.password=${jdbcDefaultPassword}\npasswords.encryption.algorithm.legacy=SHA" > ${liferayHome}/portal-ext.properties
+else
+	echo -e "liferay.home=${_liferayHome}\njdbc.default.driverClassName=${jdbcDefaultDriver}\njdbc.default.url=${jdbcDefaultUrl}\njdbc.default.username=${jdbcDefaultUsername}\njdbc.default.password=${jdbcDefaultPassword}" > ${liferayHome}/portal-ext.properties
+fi
 
 echo -e "\n\n[STATUS] Done.\n\n"
 
