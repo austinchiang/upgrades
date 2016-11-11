@@ -240,24 +240,28 @@ if [[ ${database} == mysql ]]; then
 		dbName=`mysql -u -p --skip-column-names -e "SHOW DATABASES LIKE 'lportal'"`
 
 		if [[ ${dbName} == "lportal" ]]; then
-			echo "[STATUS] Dropping 'lportal' because it exists..."
+			echo "\n\n[STATUS] Dropping 'lportal' because it exists...\n\n"
 			mysql -u -p -e 'drop database lportal;'
-			echo "[STATUS] 'lportal' dropped."
+			echo "\n\n[STATUS] 'lportal' dropped.\n\n"
 		fi
 
-		echo "[STATUS] Creating database 'lportal'..."
+		echo "\n\n[STATUS] Creating database 'lportal'...\n\n"
 		mysql -u -p -e 'create database lportal character set utf8;'
-		echo "[STATUS] 'lportal' created."
+		echo "\n\n[STATUS] 'lportal' created.\n\n"
 
-		echo "[STATUS] Importing lportal.sql to 'lportal'..."
+		echo "\n\n[STATUS] Importing lportal.sql to 'lportal'...\n\n"
 		mysql --user=${dbUsername} --password=${dbPassword} lportal < ${liferayHome}/lportal.sql
-		echo "[STATUS] Import done."
+		echo "\n\n[STATUS] Import done.\n\n"
 	fi
 fi
 
 # Delete extraneous files
 
+echo "\n\n[STATUS] Deleting temp files...\n\n"
+
 rm -rf data
 rm -f lportal.sql
+
+echo "\n\n[STATUS] Done.\n\n"
 
 $SHELL
