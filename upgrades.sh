@@ -82,9 +82,11 @@ fi
 # Sets bundle directory and unzips bundle
 
 if [[ ${portalVersion} == dxp ]]; then
+	liferayBundle=liferay-dxp-digital-enterprise-7.0-${minorVersion}
 	liferayHome=${baseDir}/liferay-dxp-digital-enterprise-7.0-${minorVersion}
 	zipFile=liferay-dxp-digital-enterprise-${appServer}-7.0-${minorVersion}*.zip
 elif [[ ${portalVersion} == ce ]]; then
+	liferayBundle=liferay-ce-portal-7.0-${minorVersion}
 	liferayHome=${baseDir}/liferay-ce-portal-7.0-${minorVersion}
 	zipFile=liferay-ce-portal-${appServer}-7.0-${minorVersion}*.zip
 else
@@ -108,9 +110,11 @@ echo -e "\n\n[STATUS] Done.\n\n"
 
 # Unzip data folder and .sql file to bundle
 
-echo -e "\n\n[STATUS] Unzipping the upgrades data folder to ${liferayHome}\n\n"
+echo -e "\n\n[STATUS] Copying the document_library folder to data folder in ${liferayHome}...\n\n"
 
-unzip data.zip -d ${liferayHome}
+unzip data.zip
+
+cp -r ./data/document_library ./${liferayBundle}/data
 
 echo -e "\n\n[STATUS] Unzipped data folder.\n\n"
 
