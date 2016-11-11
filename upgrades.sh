@@ -32,7 +32,7 @@ dbPassword=$(echo $dbPassword | tr '[A-Z]' '[a-z]')
 read -p "Specify vm ip (or use localhost): `echo $'\n> '`" vmIP
 vmIP=$(echo $vmIP | tr '[A-Z]' '[a-z]')
 
-read -p "Specify minor version (ga1, ga2, etc.): `echo $'\n> '`" minorVersion
+read -p "Specify minor version (ga1, ga2, sp1, etc.): `echo $'\n> '`" minorVersion
 minorVersion=$(echo $minorVersion | tr '[A-Z]' '[a-z]')
 
 read -p "Please what version of Liferay Portal you are upgrading from (6.0, 6.1, 6.2): `echo $'\n> '`" upgradeVersion
