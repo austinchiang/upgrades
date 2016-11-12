@@ -37,6 +37,12 @@ minorVersion=$(echo $minorVersion | tr '[A-Z]' '[a-z]')
 
 read -p "Please what version of Liferay Portal you are upgrading from (6.0, 6.1, 6.2): `echo $'\n> '`" upgradeVersion
 
+read -p "Please select which fixpack to install (1-7): `echo $'\n> '`" fixpack
+
+while [[ ${fixpack} > 7 ]]; do
+	read -p "Invalid input. Please select again (1-7): `echo $'\n> '`" fixpack
+done
+
 # Set portal-upgrade-ext properties
 
 if [[ ${database} == mysql ]]; then
@@ -269,3 +275,14 @@ rm -f lportal.sql
 echo "\n\n[STATUS] Done.\n\n"
 
 $SHELL
+
+echo -e "\n\n[STATUS] Downloading and unzipping patching tool\n\n"
+wget -q http://mirrors/files.liferay.com/private/ee/fix-packs/patching-tool/patching-tool-2.0.5.zip
+unzip -o -q patching-tool-2.0.5.zip -d ${liferayHome}
+
+echo -e "\n\n[STATUS] Downloading and installing fix pack ${fixpack}\n\n"
+cd liferay-dxp-digital-enterprise-7.0-ga1/patching-tool/patches
+wget -q http://mirrors/files.liferay.com/private/ee/fix-packs/7.0.10/de/liferay-fix-pack-de-${fixpack}-7010-src.zip
+cd .. 
+./patching-tool.sh auto-discovery
+./patching-tool.sh install
