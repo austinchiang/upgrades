@@ -35,13 +35,7 @@ vmIP=$(echo $vmIP | tr '[A-Z]' '[a-z]')
 read -p "Specify minor version (ga1, ga2, sp1, etc.): `echo $'\n> '`" minorVersion
 minorVersion=$(echo $minorVersion | tr '[A-Z]' '[a-z]')
 
-read -p "Please what version of Liferay Portal you are upgrading from (6.0, 6.1, 6.2): `echo $'\n> '`" upgradeVersion
-
-read -p "Please select which fixpack to install (1-7): `echo $'\n> '`" fixpack
-
-while [[ ${fixpack} > 7 ]]; do
-	read -p "Invalid input. Please select again (1-7): `echo $'\n> '`" fixpack
-done
+read -p "Please what version of Liferay Portal you are upgrading from (6.0, 6.1, 6.2; leave blank if none): `echo $'\n> '`" upgradeVersion
 
 # Set portal-upgrade-ext properties
 
@@ -91,6 +85,12 @@ if [[ ${portalVersion} == dxp ]]; then
 	liferayBundle=liferay-dxp-digital-enterprise-7.0-${minorVersion}
 	liferayHome=${baseDir}/liferay-dxp-digital-enterprise-7.0-${minorVersion}
 	zipFile=liferay-dxp-digital-enterprise-${appServer}-7.0-${minorVersion}*.zip
+
+	read -p "Please select which fixpack to install (1-7): `echo $'\n> '`" fixpack
+
+	while [[ ${fixpack} < 1 || ${fixpack} > 7 ]]; do
+		read -p "Invalid input. Please select again (1-7): `echo $'\n> '`" fixpack
+	done
 elif [[ ${portalVersion} == ce ]]; then
 	liferayBundle=liferay-ce-portal-7.0-${minorVersion}
 	liferayHome=${baseDir}/liferay-ce-portal-7.0-${minorVersion}
