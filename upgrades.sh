@@ -79,7 +79,7 @@ else
 	exit
 fi
 
-# Sets bundle directory and unzips bundle
+# Sets bundle directory and fix pack #
 
 if [[ ${portalVersion} == dxp ]]; then
 	liferayBundle=liferay-dxp-digital-enterprise-7.0-${minorVersion}
@@ -100,11 +100,15 @@ else
 	exit
 fi
 
+# Deletes existing Liferay bundle
+
 if [[ -e ${liferayHome} ]]; then
 	echo "[STATUS] Deleting liferay home..."
 	rm -rf ${liferayHome}
 	echo "[STATUS] Done."
 fi
+
+# Unzip new Liferay bundle
 
 echo -e "\n\n[STATUS] Unzipping a new bundle for Liferay Portal ${releaseVersion}...\n\n"
 
