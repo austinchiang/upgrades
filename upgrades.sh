@@ -114,6 +114,36 @@ done
 
 echo -e "\n\n[STATUS] Done.\n\n"
 
+# Unzips patching tool and installs fix pack if using a DXP bundle
+
+if [[ ${portalVersion} == dxp ]]; then
+	if [[ -e patching-tool-2.0.5 ]]; then
+		echo "[STATUS] Deleting patching tool..."
+		rm -rf patching-tool-2.0.5
+		echo "[STATUS] Done."
+	fi
+	
+	echo -e "\n\n[STATUS] Downloading patching tool 2.0.5...\n\n"
+	
+	wget -q http://mirrors/files.liferay.com/private/ee/fix-packs/patching-tool/patching-tool-2.0.5.zip
+
+	echo -e "\n\n[STATUS] Unzipping patching tool 2.0.5...\n\n"
+
+	unzip -q -o patching-tool-2.0.5 -d ${liferayHome}
+
+	echo -e "\n\n[STATUS] Done.\n\n"
+
+	echo -e "\n\n[STATUS] Downloading fix pack ${fixpack}...\n\n"
+	
+	(cd ${liferayHome}/patching-tool/patches && wget -q http://mirrors/files.liferay.com/private/ee/fix-packs/7.0.10/de/liferay-fix-pack-de-${fixpack}-7010-src.zip)
+
+	echo -e "\n\n[STATUS] Installing fix pack ${fixpack}...\n\n"
+
+	(cd ${liferayHome}/patching-tool && ./patching-tool.sh auto-discovery && ./patching-tool.sh install)
+	
+	echo -e "\n\n[STATUS] Done.\n\n"
+fi
+
 # Unzip data folder and .sql file to bundle
 
 echo -e "\n\n[STATUS] Copying the document_library folder to data folder in ${liferayHome}...\n\n"
@@ -275,14 +305,3 @@ rm -f lportal.sql
 echo "\n\n[STATUS] Done.\n\n"
 
 $SHELL
-
-echo -e "\n\n[STATUS] Downloading and unzipping patching tool\n\n"
-wget -q http://mirrors/files.liferay.com/private/ee/fix-packs/patching-tool/patching-tool-2.0.5.zip
-unzip -o -q patching-tool-2.0.5.zip -d ${liferayHome}
-
-echo -e "\n\n[STATUS] Downloading and installing fix pack ${fixpack}\n\n"
-cd liferay-dxp-digital-enterprise-7.0-ga1/patching-tool/patches
-wget -q http://mirrors/files.liferay.com/private/ee/fix-packs/7.0.10/de/liferay-fix-pack-de-${fixpack}-7010-src.zip
-cd .. 
-./patching-tool.sh auto-discovery
-./patching-tool.sh install
