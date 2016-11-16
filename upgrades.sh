@@ -158,6 +158,10 @@ cp -r ./data/document_library ./${liferayBundle}/data
 
 echo -e "\n\n[STATUS] Unzipped data folder.\n\n"
 
+# Writes .cfg file to osgi/configs to disable indexing
+
+echo -e "indexReadOnly=true" > ${liferayHome}/osgi/configs/com.liferay.portal.search.configuration.IndexStatusManagerConfiguration.cfg
+
 # Writes portal-ext to bundle home
 
 echo -e "\n\n[STATUS] Writing portal-ext.properties...\n\n"
