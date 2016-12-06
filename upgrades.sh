@@ -86,10 +86,10 @@ if [[ ${portalVersion} == dxp ]]; then
 	liferayHome=${baseDir}/liferay-dxp-digital-enterprise-7.0-${minorVersion}
 	zipFile=liferay-dxp-digital-enterprise-${appServer}-7.0-${minorVersion}*.zip
 
-	read -p "Please select which fixpack to install (1-7): `echo $'\n> '`" fixpack
+	read -p "Please select which fixpack to install (1-8): `echo $'\n> '`" fixpack
 
-	while [[ ${fixpack} < 1 || ${fixpack} > 7 ]]; do
-		read -p "Invalid input. Please select again (1-7): `echo $'\n> '`" fixpack
+	while [[ ${fixpack} < 1 || ${fixpack} > 8 ]]; do
+		read -p "Invalid input. Please select again (1-8): `echo $'\n> '`" fixpack
 	done
 elif [[ ${portalVersion} == ce ]]; then
 	liferayBundle=liferay-ce-portal-7.0-${minorVersion}
